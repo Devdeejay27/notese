@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:notese/models/note_database.dart';
+import 'package:notese/pages/notes_page.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  // initialize note isar database
+  WidgetsFlutterBinding.ensureInitialized();
+  await NoteDatabase.initialize();
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => NoteDatabase(),
+      child: const NoteseApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class NoteseApp extends StatelessWidget {
+  const NoteseApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: NotesPage(),
+    );
   }
 }
