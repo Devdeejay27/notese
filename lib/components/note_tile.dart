@@ -17,7 +17,7 @@ class NoteTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
       ),
       margin: const EdgeInsets.only(top: 10, left: 25, right: 25),
@@ -30,7 +30,10 @@ class NoteTile extends StatelessWidget {
               height: 100,
               backgroundColor: Theme.of(context).colorScheme.surface,
               context: context,
-              bodyBuilder: (context) => const NoteSettings(),
+              bodyBuilder: (context) => NoteSettings(
+                onEditTap: onEditPressed,
+                onDeleteTap: onDeletePressed,
+              ),
             ),
             icon: const Icon(Icons.more_vert),
           );
